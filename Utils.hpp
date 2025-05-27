@@ -34,6 +34,7 @@
     #define GREEN   "\033[0;32m"
     #define BLUE    "\033[0;34m"
     #define GRAY    "\033[1;30m"
+    #define PURPLE  "\033[1;35m"
     #define DETAIL  "\033[1;36m"
     #define NORMAL  "\033[0m"
 #else
@@ -67,7 +68,9 @@ namespace UnifiedMemSafe {
 
     inline static std::string ColorOfPtrType(VariableStates ptrType) {
         return ptrType == VariableStates::Safe ? GREEN :
-	            (ptrType == VariableStates::Seq ? GRAY : RED);
+	            (ptrType == VariableStates::Seq ? PURPLE :
+	                (ptrType == VariableStates::Dyn ? RED : GRAY)
+	            );
     }
 
 	inline static std::string getIdentifyingName(const VariableMapKeyType *Decl) {
