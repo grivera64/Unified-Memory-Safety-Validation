@@ -65,6 +65,11 @@ namespace UnifiedMemSafe {
 	            );
 	}
 
+    inline static std::string ColorOfPtrType(VariableStates ptrType) {
+        return ptrType == VariableStates::Safe ? GREEN :
+	            (ptrType == VariableStates::Seq ? GRAY : RED);
+    }
+
 	inline static std::string getIdentifyingName(const VariableMapKeyType *Decl) {
 	    std::string addr;
 	    llvm::raw_string_ostream ss(addr);

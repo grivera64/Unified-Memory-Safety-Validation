@@ -48,7 +48,7 @@ void AnalysisState::ClassifyPointerVariable(const VariableMapKeyType* Decl, Vari
         if(Variables[Decl].isGlobal)
             Variables[Decl].didClassificationChange = true;
         //errs() << GREEN << "\t=> Classified " << " as " << PtrTypeToString(ptrType) << NORMAL << "\n";
-        errs() << GREEN << "\t=> Classified " << getIdentifyingName(Decl) << " as " << PtrTypeToString(ptrType) << NORMAL << "\n";
+        errs() << ColorOfPtrType(ptrType) << "\t=> Classified " << getIdentifyingName(Decl) << " as " << PtrTypeToString(ptrType) << NORMAL << "\n";
     }
     // Fix of the Wild GEP instruction get rid of spatial checking.
     // Violated the original CCured classification, adjust if you need.
@@ -57,7 +57,8 @@ void AnalysisState::ClassifyPointerVariable(const VariableMapKeyType* Decl, Vari
         Variables[Decl].classification = ptrType;
         if(Variables[Decl].isGlobal)
             Variables[Decl].didClassificationChange = true;
-        errs() << GREEN << "\t=> Classified " << getIdentifyingName(Decl) << " as " << PtrTypeToString(ptrType) << NORMAL << "\n";
+        // errs() << GREEN << "\t=> Classified " << getIdentifyingName(Decl) << " as " << PtrTypeToString(ptrType) << NORMAL << "\n";
+        errs() << ColorOfPtrType(ptrType) << "\t=> Classified " << getIdentifyingName(Decl) << " as " << PtrTypeToString(ptrType) << NORMAL << "\n";
     }
     else {
         //errs() << GRAY << "\t=> Ignored classification of " << " as " << PtrTypeToString(ptrType) << NORMAL << "\n";
