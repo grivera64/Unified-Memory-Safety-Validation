@@ -113,8 +113,18 @@ Value *UnifiedMemSafe::Uriah::getRootValue(Value *v) {
     }
     else if (CallInst *call = dyn_cast_or_null<CallInst>(v)){
         if ((call->getCalledFunction()!=NULL) && call->getCalledFunction()->getName().contains("alloc")) {
-            Value *arg_0 = call->getArgOperand(0);
-            return getRootValue(arg_0);
+            if (call->arg_size() > 0) {
+                Value *arg_0 = call->getArgOperand(0);
+                return getRootValue(arg_0);
+            }
+            errs() << "WARNING: alloc call with arg_size == 0: " << call->getCalledFunction()->getName();
+            if (call->getDebugLoc()){
+                errs() << ", ";
+                call->getDebugLoc().print(errs());
+            }
+            errs() << "\n";
+
+            return root;
         }	
     }
     else if (CastInst *cast = dyn_cast<CastInst>(v)) {
