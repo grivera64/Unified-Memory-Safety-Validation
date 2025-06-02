@@ -556,17 +556,20 @@ void valueRangeAnalysis(Module *M, std::map<const UnifiedMemSafe::VariableMapKey
     }
     errs() << GREEN << "Unsafe Seq Pointer After Value Range Analysis:\t\t" << DETAIL << heapUnsafeSeqPointerSet.size()<< NORMAL << "\n"; 
 
-    /*for (const auto &pair : heapUnsafeSeqPointerSet) {
-        const llvm::Value *key = pair.first;
+    if (heapUnsafeSeqPointerSet.size() > 0) {
+        llvm::outs() << "All Unsafe SEQ Instructions\n";
+        for (const auto &pair : heapUnsafeSeqPointerSet) {
+            const llvm::Value *key = pair.first;
 
-        // Use llvm::dyn_cast to cast the key to an Instruction
-        if (const llvm::Instruction *instruction = llvm::dyn_cast<llvm::Instruction>(key)) {
-            // Print the instruction using LLVM's print method
-            instruction->print(llvm::outs());
-            llvm::outs() << "\n";
-        } else {
-            std::cerr << "Key cannot be cast to LLVM Instruction." << std::endl;
+            // Use llvm::dyn_cast to cast the key to an Instruction
+            if (const llvm::Instruction *instruction = llvm::dyn_cast<llvm::Instruction>(key)) {
+                // Print the instruction using LLVM's print method
+                llvm::outs() << "\t";
+                instruction->print(llvm::outs());
+                llvm::outs() << "\n";
+            } else {
+                std::cerr << GRAY << "Key cannot be cast to LLVM Instruction." << NORMAL << std::endl;
+            }
         }
     }
-    */
 }
