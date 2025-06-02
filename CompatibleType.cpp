@@ -396,7 +396,7 @@ void CompatibleType::safeTypeCastAnalysis(
                 instruction->print(llvm::outs());
                 llvm::outs() << "\n";
             } else {
-                std::cerr << GRAY << "Key cannot be cast to LLVM Instruction." << NORMAL << std::endl;
+                errs() << GRAY << "Key cannot be cast to LLVM Instruction." << NORMAL << "\n";
             }
         }
     }
