@@ -567,8 +567,10 @@ void valueRangeAnalysis(Module *M, std::map<const UnifiedMemSafe::VariableMapKey
                 llvm::outs() << "\t";
                 instruction->print(llvm::outs());
                 llvm::outs() << "\n";
+                llvm::outs() << "\n";
             } else {
                 errs() << GRAY << "Key cannot be cast to LLVM Instruction." << NORMAL << "\n";
+                errs() << "\n";
             }
         }
     }
