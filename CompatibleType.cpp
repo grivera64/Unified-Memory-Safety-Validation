@@ -385,20 +385,18 @@ void CompatibleType::safeTypeCastAnalysis(
            << DETAIL << heapDynPointerSet.size() << NORMAL << "\n\n\n";
 
     if (heapDynPointerSet.size() > 0) {
-        llvm::outs() << "All Unsafe DYN Instructions\n";
+        errs() << "All Unsafe DYN Instructions\n";
         for (const auto &pair : heapDynPointerSet) {
             const llvm::Value *key = pair.first;
 
             // Use llvm::dyn_cast to cast the key to an Instruction
             if (const llvm::Instruction *instruction = llvm::dyn_cast<llvm::Instruction>(key)) {
                 // Print the instruction using LLVM's print method
-                llvm::outs() << "\t";
-                instruction->print(llvm::outs());
-                llvm::outs() << "\n";
-                llvm::outs() << "\n";
+                errs() << "\t";
+                instruction->print(errs());
+                errs() << "\n";
             } else {
                 errs() << GRAY << "Key cannot be cast to LLVM Instruction." << NORMAL << "\n";
-                errs() << "\n";
             }
         }
     }
