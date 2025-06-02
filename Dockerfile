@@ -55,7 +55,7 @@ RUN cmake .. \
 # Build libUnifiedMemSafe.so (Validation)
 WORKDIR /GitHub/Unified-Memory-Safety-Validation
 RUN cmake . \
-    && make
+    && make -j$(nproc)
 
 RUN cp libUnifiedMemSafe.so $LLVM_DIR/lib/
 
